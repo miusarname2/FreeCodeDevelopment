@@ -3,18 +3,24 @@ import { useState } from "react";
 export default function reqView() {
   const [appTypeSelect, setAppTypeSelect] = useState('');  
   const redirOrigin = ()=> window.location.href = "/";
+  const cancelHref = (e:any)=>{
+    e.preventDefault();
+    window.location.href = '/';
+}
   const redirnext = (e:any)=>{
     e.preventDefault();
     if (appTypeSelect != '') {
       console.log('pass');
-      //window.location.href = `/app/${appTypeSelect}`;
+      console.log(`/app/${appTypeSelect}`);
+      window.location.href = `/app/${appTypeSelect}`;
     }else{
       alert("Please select an option");
     }
   }
-  const selectType = (e:any) => {
+  const selectType = (e:any,btnSelect :string) => {
     e.preventDefault();
-    setAppTypeSelect(e.target.value);
+    console.log(btnSelect)
+    setAppTypeSelect(btnSelect);
   };
 
   return (
@@ -72,7 +78,9 @@ export default function reqView() {
       </div>
     </div>
     <div className="grid grid-cols-3 gap-3 mb-3">
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType} >
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"App")
+      }} >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -92,7 +100,9 @@ export default function reqView() {
         </svg>
         <span>App</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"DocumentApp")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -110,7 +120,9 @@ export default function reqView() {
         </svg>
         <span>Document App</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"Game")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -131,7 +143,9 @@ export default function reqView() {
         </svg>
         <span>Game</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"AugmentedRealityApp")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -155,7 +169,9 @@ export default function reqView() {
         </svg>
         <span>Augmented Reality App</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"AppPlayground")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -172,7 +188,9 @@ export default function reqView() {
         </svg>
         <span>App Playground</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"StickerPackApp")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -193,7 +211,9 @@ export default function reqView() {
         </svg>
         <span>Sticker Pack App</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"iMessageApp")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -211,7 +231,9 @@ export default function reqView() {
         </svg>
         <span>iMessage App</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"SafariExtensionApp")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -234,7 +256,9 @@ export default function reqView() {
       </button>
     </div>
     <div className="grid grid-cols-3 gap-6 mb-6">
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"Framework")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -254,7 +278,9 @@ export default function reqView() {
         </svg>
         <span>Framework</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"StaticLibrary")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -274,7 +300,9 @@ export default function reqView() {
         </svg>
         <span>Static Library</span>
       </button>
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={selectType}>
+      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
+        selectType(e,"MetalLibrary")
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={24}
@@ -296,7 +324,7 @@ export default function reqView() {
       </button>
     </div>
     <div className="flex justify-between">
-      <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#3a3a3a] text-white" onClick={redirOrigin}>
+      <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#3a3a3a] text-white" onClick={cancelHref}>
         Cancel
       </button>
       <div className="flex gap-4">

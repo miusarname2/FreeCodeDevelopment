@@ -1,37 +1,21 @@
 import * as React from "react";
+import { dialog } from "@tauri-apps/api";
 
 export const ImportForm: React.FunctionComponent = () => {
-  const folderInput = React.useRef(null);
-
-  const handleFileChange = (event:any) => {
-    console.log(event.target);
-    alert(event.target.files[0].path);
+  const handleFileChange = async () => {
+    const result = await dialog.open({ directory: true });
+    console.log(result);
   };
 
   return (
     <>
-      <label className="flex items-center text-white space-x-2 transition-colors duration-200 rounded-lg overflow-hidden hover:bg-[#3C3C3E]">
+      <button onClick={handleFileChange} className="flex items-center text-white space-x-2 transition-colors duration-200 rounded-lg overflow-hidden hover:bg-[#3C3C3E]">
         <FolderIcon className="text-[#8E8E93]" />
         <span>Open Existing Project...</span>
-        <input
-          type="file"
-          directory=""
-          webkitdirectory=""
-          className="form-control"
-          ref={folderInput}
-          onChangeCapture={handleFileChange}
-        />              
-      </label>
+      </button>
     </>
   );
 };
-
-declare module 'react' {
-  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-    directory?: string;
-    webkitdirectory?: string;
-  }
-}
 
 function FolderIcon(props: any) {
   return (

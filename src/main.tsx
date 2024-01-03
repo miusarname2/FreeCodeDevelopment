@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import ReqReview from "./components/reqView.tsx";
 import CreateForm from "./components/creationForm.tsx";
 import GitClone from "./components/cloneGithub.tsx";
+import CodeE from './components/codeEdit.tsx';
 import "./styles.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/app/App",
     element: <CreateForm />,
+  },
+  {
+    path: "/code",
+    element: <CodeE />,
   },
 ]);
 

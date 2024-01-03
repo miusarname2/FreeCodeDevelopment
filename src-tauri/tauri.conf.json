@@ -23,6 +23,19 @@
         "message": true,
         "open": true,
         "save": true
+      },
+      "fs": {
+        "all": true,
+        "copyFile": false,
+        "createDir": false,
+        "exists": false,
+        "readDir": false,
+        "readFile": false,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": ["/**/**/**"],
+        "writeFile": false
       }
     },
     "bundle": {

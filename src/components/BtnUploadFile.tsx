@@ -24,7 +24,8 @@ export const ImportForm: React.FunctionComponent = () => {
       var dirReaded = await readDirRecursive(result);
   
       if (dirReaded) {
-        console.log(dirReaded);
+        console.log(dirReaded,"esto se lee");
+        window.location.href='/code';
       }
     } else {
       console.error("El resultado no es una cadena.");

@@ -20,7 +20,7 @@ export default function index() {
             alt="FreeCode Icon"
             className="mb-4"
             height="128"
-            src="https://github.com/miusarname/assets/blob/main/f%20(1).png?raw=true"
+            src="/logoF.svg"
             style={{
               aspectRatio: "128/128",
               objectFit: "cover",
@@ -61,7 +61,7 @@ export default function index() {
                 alt="Swift logo"
                 className="w-5 h-5"
                 height="20"
-                src="https://github.com/miusarname/assets/blob/main/Screenshot_2023-12-29_035520-removebg-preview.png?raw=true"
+                src="/swift File.svg"
                 style={{
                   aspectRatio: "20/20",
                   objectFit: "cover",
@@ -80,7 +80,7 @@ export default function index() {
                 alt="Swift logo"
                 className="w-5 h-5"
                 height="20"
-                src="https://cgrevisse.gallerycdn.vsassets.io/extensions/cgrevisse/swift-project-creation/1.1.1/1646689587550/Microsoft.VisualStudio.Services.Icons.Default"
+                src="/Swift Project.svg"
                 style={{
                   aspectRatio: "20/20",
                   objectFit: "cover",
@@ -97,7 +97,7 @@ export default function index() {
                 alt="Swift logo"
                 className="w-5 h-5"
                 height="20"
-                src="https://cdn.jim-nielsen.com/ios/512/apple-developer-2020-02-10.png"
+                src="/App Project.svg"
                 style={{
                   aspectRatio: "20/20",
                   objectFit: "cover",

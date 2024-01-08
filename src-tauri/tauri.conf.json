@@ -13,8 +13,22 @@
     "allowlist": {
       "all": false,
       "shell": {
-        "all": false,
-        "open": true
+        "all": true,
+        "execute": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "git",
+            "cmd": "git",
+            "args": ["clone",{ "validator": "\\S+" }]
+          },
+          {
+            "name": "rustc",
+            "cmd": "rustc",
+            "args": ["--version"]
+          }
+        ],
+        "sidecar": true
       },
       "dialog": {
         "all": true,

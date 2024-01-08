@@ -1,7 +1,21 @@
+import { Command } from "@tauri-apps/api/shell";
+import { dialog } from "@tauri-apps/api";
+import { useState } from "react";
+
 export default function cloneGithub() {
+  const [urlRepo, setUrlRepo] = useState('');
   const cancelHref = (e:any)=>{
     e.preventDefault();
     window.location.href = '/';
+}
+
+const handleFileChange = async () => {
+  //console.log(urlRepo);
+  let getDric = await dialog.open({ directory: true });
+  const result = typeof getDric == "string" ? getDric : ""
+  console.log(result,"result");
+  const echoss =  new Command('git',["clone",urlRepo]);
+  console.log( await echoss.execute())
 }
   return (
     <>
@@ -33,12 +47,19 @@ export default function cloneGithub() {
       <div className="flex gap-4">
         <input
           className="flex h-10 w-full px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-grow text-white bg-[#3C3C3C] border border-[#3C3C3C] rounded"
-          placeholder="Enter repository URL"
+          placeholder="Enter repository URL" 
+          onChange={
+            (e)=>{
+              setUrlRepo(e.target.value);
+            }
+          }
         />
         <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-slate-400 text-white" onClick={cancelHref}>
           Cancel
         </button>
-        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ACC] text-white">
+        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ACC] text-white" onClick={()=>{
+          handleFileChange();
+        }}>
           Clone
         </button>
       </div>

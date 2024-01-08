@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
+import Topbar from './topBar';
 import "../styles/codeEdit.css";
 
 export default function sidebarCode() {
   const [archive, setArchive] = useState("");
   return (
     <>
-      <>
+    <Topbar/>
         <div className="flex h-screen bg-[#1e1e1e]">
           <div className="flex flex-col w-64 bg-[#252526] text-white">
             <div className="flex flex-col w-64 h-screen bg-[#1e1e1e] text-white">
@@ -668,6 +669,64 @@ export default function sidebarCode() {
                     <span className="text-xs font-semibold">
                       vite.config.ts
                     </span>
+                  </div><div className="flex items-center space-x-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-yellow-500"
+                    >
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    <span className="text-xs font-semibold">
+                      vite.config.ts
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-yellow-500"
+                    >
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    <span className="text-xs font-semibold">
+                      vite.config.ts
+                    </span>
+                  </div><div className="flex items-center space-x-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-yellow-500"
+                    >
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    <span className="text-xs font-semibold">
+                      vite.config.ts
+                    </span>
                   </div>
                 </div>
               </div>
@@ -987,15 +1046,11 @@ export default function sidebarCode() {
                   </div>
                 </>
               ) : (
-                <Editor
-                  theme="vs-dark"
-                  defaultLanguage="swift"
-                />
+                <Editor theme="vs-dark" defaultLanguage="swift" />
               )}
             </div>
           </div>
         </div>
       </>
-    </>
   );
 }

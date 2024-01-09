@@ -1,5 +1,7 @@
 import { Command } from "@tauri-apps/api/shell";
 import { dialog } from "@tauri-apps/api";
+import { join } from "@tauri-apps/api/path";
+
 import { useState } from "react";
 
 export default function cloneGithub() {
@@ -13,9 +15,17 @@ const handleFileChange = async () => {
   //console.log(urlRepo);
   let getDric = await dialog.open({ directory: true });
   const result = typeof getDric == "string" ? getDric : ""
-  console.log(result,"result");
-  const echoss =  new Command('git',["clone",urlRepo]);
-  console.log( await echoss.execute())
+  let fileDirect= await join(result);
+  console.log(fileDirect,"result");
+   const echoss =  new Command('git',["clone",urlRepo,await fileDirect]); 
+  const toResp = (await echoss.execute()).stderr;
+  console.log(toResp);
+  if (toResp.startsWith('Cloning' )) {
+    alert("Todo ha ido bien");
+    window.location.href='/code'
+  }else{
+    alert(`Algo ha ocurrido ${toResp}`);
+  }
 }
   return (
     <>
@@ -40,6 +50,9 @@ const handleFileChange = async () => {
           <path d="M12 8h.01" />
         </svg>
       </div>
+      <p className="text-yellow-400 mb-6">
+      When selecting a folder, make sure it is empty so that everything goes as expected.
+      </p>
       <p className="text-gray-400 mb-6">
         Add a hosted account to view your starred, personal and organizational
         repositories

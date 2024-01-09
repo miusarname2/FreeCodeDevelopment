@@ -20,15 +20,28 @@
           {
             "name": "git",
             "cmd": "git",
-            "args": ["clone",{ "validator": "\\S+" }]
+            "args": ["clone",{ "validator": "\\S+" },{ "validator": "\\S+" }]
           },
           {
             "name": "rustc",
             "cmd": "rustc",
             "args": ["--version"]
+          },
+          {
+            "name": "pushd",
+            "cmd": "pushd ",
+            "args": [{ "validator": "\\S+" }]
+          },
+          {
+            "name": "cd",
+            "cmd": "cd ",
+            "args": [{ "validator": "\\S+" },"&& git clone ",{ "validator": "\\S+" }]
           }
         ],
         "sidecar": true
+      },
+      "path": {
+        "all": true
       },
       "dialog": {
         "all": true,

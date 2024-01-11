@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { CommandLineIcon,DevicePhoneMobileIcon } from "@heroicons/react/24/solid";
+import BtnOption from './OptionOfCreationProject';
 
 export default function reqView() {
   const [appTypeSelect, setAppTypeSelect] = useState('');  
@@ -16,6 +18,10 @@ export default function reqView() {
     }else{
       alert("Please select an option");
     }
+  }
+
+  const backWin =()=>{
+    window.history.back();
   }
   const selectType = (e:any,btnSelect :string) => {
     e.preventDefault();
@@ -78,28 +84,7 @@ export default function reqView() {
       </div>
     </div>
     <div className="grid grid-cols-3 gap-3 mb-3">
-      <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
-        selectType(e,"App")
-      }} >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={24}
-          height={24}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="bg-blue-600 p-4 rounded-lg mb-2"
-        >
-          <rect x={2} y={4} width={20} height={16} rx={2} />
-          <path d="M10 4v4" />
-          <path d="M2 8h20" />
-          <path d="M6 4v4" />
-        </svg>
-        <span>App</span>
-      </button>
+      <BtnOption content="App" icon={<DevicePhoneMobileIcon className="bg-blue-600 p-1 rounded-lg mb-2 w-10"/>} onClickFunc={selectType} key={"a"}/>
       <button className="flex flex-col items-center hover:shadow-lg transition-shadow duration-200" onClick={(e)=>{
         selectType(e,"DocumentApp")
       }}>
@@ -328,7 +313,9 @@ export default function reqView() {
         Cancel
       </button>
       <div className="flex gap-4">
-        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#3a3a3a] text-white" onClick={redirOrigin}>
+        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#3a3a3a] text-white" onClick={()=>{
+          backWin()
+        }}>
           Previous
         </button>
         <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-blue-600 text-white" onClick={redirnext}>

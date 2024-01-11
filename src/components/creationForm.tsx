@@ -1,12 +1,48 @@
+import { dialog } from "@tauri-apps/api";
+import { readDir } from "@tauri-apps/api/fs";
+import { useState } from "react";
+
 export default function creationForm() {
-    const previousHref = (e:any)=>{
-        e.preventDefault();
-        window.location.href = '/welcome';
+  const [organization, setOrganization] = useState("organization-identifier");
+  const [productName, setProductName] = useState("MyProject")
+  const [bundleIdentify, setBundleIdentify] = useState("")
+  const readDirRecursive = async (path: any) => {
+    const dirContents = await readDir(path);
+
+    const recursivePromises = dirContents.map(async (item) => {
+      if (item.children && item.children.length >= 0) {
+        // Si el elemento tiene hijos, realizar una llamada recursiva
+        item.children = await readDirRecursive(item.path);
+      }
+      return item;
+    });
+
+    return Promise.all(recursivePromises);
+  };
+
+  const handleFileChange = async () => {
+    const result = await dialog.open({ directory: true });
+
+    if (typeof result === "string") {
+      var dirReaded = await readDirRecursive(result);
+
+      if (dirReaded) {
+        console.log(dirReaded, "esto se lee");
+        window.location.href = "/code";
+      }
+    } else {
+      console.error("El resultado no es una cadena.");
     }
-    const cancelHref = (e:any)=>{
-        e.preventDefault();
-        window.location.href = '/';
-    }
+  };
+
+  const previousHref = (e: any) => {
+    e.preventDefault();
+    window.location.href = "/welcome";
+  };
+  const cancelHref = (e: any) => {
+    e.preventDefault();
+    window.location.href = "/";
+  };
   return (
     <>
       <div className="bg-[#1e1e1e] p-6 rounded-lg text-white w-full h-full">
@@ -27,6 +63,10 @@ export default function creationForm() {
                 id="product-name"
                 placeholder="MyProject"
                 type="text"
+                value={productName}
+                onChange={(e)=>{
+                  setProductName(e.target.value)
+                }}
               />
             </div>
             <div>
@@ -47,8 +87,12 @@ export default function creationForm() {
               <input
                 className="bg-[#2d2d2d] text-white border border-[#555] rounded px-2 py-1 w-full"
                 id="organization-identifier"
-                placeholder="Enter Organization Identifier"
+                placeholder="organization-identifier"
                 type="text"
+                value={organization}
+                onChange={(e)=>{
+                  setOrganization(e.target.value)
+                }}
               />
             </div>
             <div>
@@ -63,6 +107,10 @@ export default function creationForm() {
                 id="bundle-identifier"
                 placeholder="OrganizationIdentifier.ProductName"
                 type="text"
+                value={bundleIdentify? bundleIdentify : `${organization}.${productName}`}
+                onChange={(e)=>{
+                  setBundleIdentify(e.target.value);
+                }}
               />
             </div>
             <div>
@@ -104,14 +152,20 @@ export default function creationForm() {
           </div>
         </div>
         <div className="flex justify-between">
-          <button className="bg-[#3c3c3c] text-white px-4 py-2 rounded hover:bg-[#555] transition-colors" onClick={cancelHref}>
+          <button
+            className="bg-[#3c3c3c] text-white px-4 py-2 rounded hover:bg-[#555] transition-colors"
+            onClick={cancelHref}
+          >
             Cancel
           </button>
           <div className="flex gap-2">
-            <button className="bg-[#3c3c3c] text-white px-4 py-2 rounded hover:bg-[#555] transition-colors" onClick={previousHref}>
+            <button
+              className="bg-[#3c3c3c] text-white px-4 py-2 rounded hover:bg-[#555] transition-colors"
+              onClick={previousHref}
+            >
               Previous
             </button>
-            <button className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+            <button className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition-colors" onClick={handleFileChange}>
               Next
             </button>
           </div>

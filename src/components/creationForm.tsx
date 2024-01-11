@@ -1,5 +1,6 @@
 import { dialog } from "@tauri-apps/api";
-import { readDir } from "@tauri-apps/api/fs";
+import { createDir, readDir } from "@tauri-apps/api/fs";
+import { join } from "@tauri-apps/api/path";
 import { useState } from "react";
 
 export default function creationForm() {
@@ -21,18 +22,11 @@ export default function creationForm() {
   };
 
   const handleFileChange = async () => {
-    const result = await dialog.open({ directory: true });
-
-    if (typeof result === "string") {
-      var dirReaded = await readDirRecursive(result);
-
-      if (dirReaded) {
-        console.log(dirReaded, "esto se lee");
-        window.location.href = "/code";
-      }
-    } else {
-      console.error("El resultado no es una cadena.");
-    }
+    let getDric = await dialog.open({ directory: true });
+  const result = typeof getDric == "string" ? getDric : ""
+  let fileDirect= await join(result);
+  console.log( await fileDirect,"result");
+  //const createdirect = await createDir()
   };
 
   const previousHref = (e: any) => {
